@@ -4,15 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 <body>
     
-    <header>
-
+    <header class="w-full h-20 border-gray-200 border-3">
+        <div class="container w-11/12 h-full mx-auto flex">
+            <div class="head-site-name-box w-1/2 h-full flex items-center"><h1 class="text-3xl "><strong>Where in the world ?</strong></h1></div>
+            <div class="site-mode-box w-1/2 h-full flex items-center justify-end">
+                <button type="button" class="cursor-pointer"><i class="fa-regular fa-moon"></i> <strong>Dark Mode</strong></button>
+            </div>
+        </div>
     </header>
-    <main>
-
+    <main class="w-full h-187">
+        <div class="container w-11/12 h-full mx-auto">
+            <section>
+                <div class="back-btn-box w-full h-30 p-5">
+                    <a href="/index.html"><i class="fa-solid fa-arrow-left"></i> Back</a>
+                </div>
+                <div class="country-box flex gap-20">
+                    <div class="country-flag-img w-1/2">
+                        <img class="rounded-xl w-full" src="https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Flag_of_Germany.svg/640px-Flag_of_Germany.svg.png" alt="country flag">
+                    </div>
+                    <div class="country-data-box w-1/2 flex gap-15">
+                        <div>                        
+                            <h2 class="text-3xl"><strong>Germany</strong></h2>
+                            <p class="mt-5 text-xl">Native Name: <span class="text-gray-500">germany</span></p>
+                            <p class="mt-1 text-xl">Population: <span class="text-gray-500">122,233,324</span></p>
+                            <p class="mt-1 text-xl">Region: <span class="text-gray-500">Europe</span></p>
+                            <p class="mt-1 text-xl">Sub Region: <span class="text-gray-500">Europe</span></p>
+                            <p class="mt-1 text-xl">Capital: <span class="text-gray-500">Europe</span></p>
+                            <p class="text-xl mt-25">Border Countries: <span class="text-gray-500"></span></p>
+                        </div>
+                        <div class="mt-13">
+                            <p class="mt-1 text-xl">Top Level Domain: <span class="text-gray-500">germany</span></p>
+                            <p class="mt-1 text-xl">Curencies: <span class="text-gray-500">germany</span></p>
+                            <p class="mt-1 text-xl">Languages: <span class="text-gray-500">germany</span></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
     </main>
 
 </body>
