@@ -4,16 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>REST Countries</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 <body>
 
-    <header>
+    <template class="js-temp">
+        <li class="w-75 h-90 rounded-xl shadow-xl">
+            <img class="rounded-t-xl" src="https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Flag_of_Germany.svg/640px-Flag_of_Germany.svg.png" alt="country flag">
+            <div class="data-country w-full p-5">
+                <h2 class="text-2xl"><strong>Germany</strong></h2>
+                <p>Population: <span class="text-gray-500">123,123,123</span></p>
+                <p>Region: <span class="text-gray-500">Europe</span></p>
+                <p>Capital: <span class="text-gray-500">Berlin</span></p>
+            </div>
+        </li>
+    </template>
 
+    <header class="w-full h-20 border-3 border-gray-200">
+        <div class="container w-11/12 mx-auto flex justify-between">
+            <h1 class="text-3xl mt-4 ml-3"><strong>Where in the world?</strong></h1>
+            <div class="mt-5">
+                <i class="fa-solid fa-moon"></i>
+                <button class="mr-4"><strong>Dark Mode</strong></button>
+            </div>
+        </div>
     </header>
-    <main>
-        
+    <main class="w-full flex flex-col h-186 bg-gray-200">
+        <div class="container w-11/12 mx-auto justify-between">
+            <section class="hero">
+                <div class="w-full h-20 flex justify-between items-center">
+                    <input class="w-100 h-10 p-5 outline-transparent border-transparent inset-shadow-sm inset-shadow-gray-500 rounded-lg bg-white" type="text" placeholder="Search for a country…">
+                    <select name="" id="" class="bg-white w-30 h-8 rounded-lg">
+                        <option value="" disabled selected hidden>Filter By Region</option>
+                    </select>
+                </div>
+                <ul class="w-full h-190 flex flex-wrap justify-between gap-1"></ul>
+            </section>
+        </div>
     </main>
-    
+
     <script src="./main.js"></script>
 </body>
 </html>
