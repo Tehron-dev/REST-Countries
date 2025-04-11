@@ -1,7 +1,7 @@
 const elTemp = document.querySelector(".js-temp").content;
 const elCountriesList = document.querySelector(".js-countries-list");
 const elPeginationBox = document.querySelector(".js-pegination-box");
-const elSearchCountry = document.querySelector(".js-serarch-countries");
+const elSearchCountry = document.querySelector(".js-search-countries");
 let elListPage = document.querySelector(".js-list-page");
 let currentPage = 1;
 let itemsPerPage = 8;
@@ -18,7 +18,7 @@ async function fetchUrl(url) {
     };
 };
 
-async function renderFunction(arr) {
+async function renderFunction(arr, regex="") {
     const docFrag = document.createDocumentFragment();
     arr.forEach((country, index) => {
         country["id"] = index + 1;
@@ -27,7 +27,13 @@ async function renderFunction(arr) {
         countryFlagImg.src = country.flags.png;
         countryFlagImg.dataset.id = country.id;
         const countryName = clone.querySelector(".js-country-name");
-        countryName.textContent = country.name.common;
+        if(regex && (regex == "(?:)")) {
+            countryName.innerHTML = country.name.common.replaceAll(regex, match => {
+                return `<mark class="rounded-lg">${match}</mark>`
+            })
+        }else {
+            countryName.textContent = country.name.common;
+        }
         countryName.dataset.id = country.id;
         clone.querySelector(".js-country-population").textContent = country.population;
         clone.querySelector(".js-country-region").textContent = country.region;
@@ -36,7 +42,6 @@ async function renderFunction(arr) {
     });
     elCountriesList.append(docFrag)
 }
-fetchUrl("https://restcountries.com/v3.1/all");
 
 function renderPage(){
     let startInd = (currentPage - 1) * itemsPerPage;
@@ -61,3 +66,17 @@ elPeginationBox.addEventListener("click", evt => {
         }
     }
 });  
+  
+elSearchCountry.addEventListener("input", (evt) => {
+    const searchValue = evt.target.value.trim()
+    let regex = new RegExp(searchValue, "gi");
+    let searchResult = countries.filter(country => {
+        let res = searchValue == "" || country.name.common.match(regex)
+        return res;
+    })
+    console.log(searchResult)
+    
+    renderFunction(countries, regex)
+});
+
+fetchUrl("https://restcountries.com/v3.1/all");
