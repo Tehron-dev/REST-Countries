@@ -84,3 +84,4 @@ elSearchCountry.addEventListener("input", (evt) => {
 });
 
 fetchUrl("https://restcountries.com/v3.1/all");
+elCountriesList.addEventListener("click", country);

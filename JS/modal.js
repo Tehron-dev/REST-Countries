@@ -10,11 +10,9 @@ const country = (evt) => {
 };
 
 function countryData(countryId){
-    let country = countries.filter(country => country.id == countryId);
+    let country = countries.find(country => country.id == countryId);
     console.log(country)
     elFlagImg.src = country.flags.png;
     elDataCountryName.textContent = country.name.common;
     elDataCountryNativename.textContent = country.name.nativeName.eng.common
 };
-
-elCountriesList.addEventListener("click", country);
