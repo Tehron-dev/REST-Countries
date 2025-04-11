@@ -1,5 +1,8 @@
+const elFlagImg = document.querySelector(".js-country-data-flag-img");
+const elDataCountryName = document.querySelector(".js-data-country-name");
+const elDataCountryNativename = document.querySelector(".js-data-country-nativename");
+
 const country = (evt) => {
-    console.log(evt.target.dataset.id)
     if(evt.target.dataset.id){
         // window.location.href = "/html/main.html";
         countryData(evt.target.dataset.id);
@@ -7,9 +10,11 @@ const country = (evt) => {
 };
 
 function countryData(countryId){
-    console.log(countryId)
     let country = countries.filter(country => country.id == countryId);
     console.log(country)
+    elFlagImg.src = country.flags.png;
+    elDataCountryName.textContent = country.name.common;
+    elDataCountryNativename.textContent = country.name.nativeName.eng.common
 };
 
 elCountriesList.addEventListener("click", country);

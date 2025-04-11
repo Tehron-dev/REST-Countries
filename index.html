@@ -48,8 +48,19 @@
             <section class="hero">
                 <div class="w-full h-20 flex justify-between items-center ">
                     <input class="js-search-countries w-100 h-10 p-5 outline-transparent border-transparent inset-shadow-sm inset-shadow-gray-500 rounded-lg bg-white" type="text" placeholder="Search for a country…">
-                    <select name="" id="" class="bg-white w-30 h-8 rounded-lg">
+                    <select name="" id="" class="bg-white w-35 h-8 rounded-lg">
                         <option value="" disabled selected hidden>Filter By Region</option>
+                        <option value="africa">Africa</option>
+                        <option value="america">America</option>
+                        <option value="asia">Asia</option>
+                        <option value="europe">Europe</option>
+                        <option value="oceania">Oceania</option>
+                    </select>
+                    <select name="" id="" class="bg-white w-35 h-8 rounded-lg">
+                        <option value="" disabled selected hidden>Sort</option>
+                        <option value="a-z">A-Z</option>
+                        <option value="z-a">Z-A</option>
+                        <option value="population">Population</option>
                     </select>
                 </div>
                 <ul class="js-countries-list w-full h-210 flex flex-wrap justify-between gap-1 light"></ul>
