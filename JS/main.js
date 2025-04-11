@@ -6,6 +6,7 @@ let elListPage = document.querySelector(".js-list-page");
 let currentPage = 1;
 let itemsPerPage = 8;
 let countries = [];
+let currentItems = [];
 
 async function fetchUrl(url) {
     try {
@@ -20,6 +21,7 @@ async function fetchUrl(url) {
 
 async function renderFunction(arr, regex="") {
     const docFrag = document.createDocumentFragment();
+    elCountriesList.innerHTML = ''
     arr.forEach((country, index) => {
         country["id"] = index + 1;
         let clone = elTemp.cloneNode(true);
@@ -46,7 +48,7 @@ async function renderFunction(arr, regex="") {
 function renderPage(){
     let startInd = (currentPage - 1) * itemsPerPage;
     let lastInd = startInd + itemsPerPage;
-    let currentItems = countries.slice(startInd, lastInd);
+    currentItems = countries.slice(startInd, lastInd);
     elCountriesList.innerHTML = '';
     renderFunction(currentItems);
     elListPage.textContent = currentPage;
@@ -66,17 +68,19 @@ elPeginationBox.addEventListener("click", evt => {
         }
     }
 });  
+
+function filterCountries(regex, searchValue){
+    let searchResult = currentItems.filter(country => {
+        let res = searchValue == "" || country.name.common.match(regex);
+        return res;
+    });
+    renderFunction(searchResult, regex);
+};  
   
 elSearchCountry.addEventListener("input", (evt) => {
     const searchValue = evt.target.value.trim()
     let regex = new RegExp(searchValue, "gi");
-    let searchResult = countries.filter(country => {
-        let res = searchValue == "" || country.name.common.match(regex)
-        return res;
-    })
-    console.log(searchResult)
-    
-    renderFunction(countries, regex)
+    filterCountries(regex, searchValue);
 });
 
 fetchUrl("https://restcountries.com/v3.1/all");
