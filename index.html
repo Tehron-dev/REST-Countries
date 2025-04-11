@@ -6,44 +6,65 @@
     <title>REST Countries</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+    .dark {
+        background: #2b3844;
+        color: #fff;
+        box-shadow: 0px 2px 4px 0px #0000000e;
+    }
+
+    .light {
+        background: #fff;
+        color: #000;
+        box-shadow: 0px 2px 4px 0px #0000000e;
+    }
+    </style>
 </head>
 <body>
 
-    <template class="js-temp">
-        <li class="w-75 h-90 rounded-xl shadow-xl">
-            <img class="rounded-t-xl" src="https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Flag_of_Germany.svg/640px-Flag_of_Germany.svg.png" alt="country flag">
-            <div class="data-country w-full p-5">
-                <h2 class="text-2xl"><strong>Germany</strong></h2>
-                <p>Population: <span class="text-gray-500">123,123,123</span></p>
-                <p>Region: <span class="text-gray-500">Europe</span></p>
-                <p>Capital: <span class="text-gray-500">Berlin</span></p>
+    <template class="js-temp light">
+        <li class="js-country-list w-75 h-90 rounded-xl shadow-xl mt-5">
+            <img class="js-country-flag-img rounded-t-xl w-full h-50" src="https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Flag_of_Germany.svg/640px-Flag_of_Germany.svg.png" alt="country flag">
+            <div class="js-data-country w-full p-5">
+                <h2 class="text-2xl"><strong class="js-country-name">Germany</strong></h2>
+                <p>Population: <span class="js-country-population">123,123,123</span></p>
+                <p>Region: <span class="js-country-region">Europe</span></p>
+                <p>Capital: <span class="js-country-capital">Berlin</span></p>
             </div>
         </li>
     </template>
 
-    <header class="w-full h-20 border-3 border-gray-200">
+    <header class="js-header w-full h-20 border-3 border-gray-200 light">
         <div class="container w-11/12 mx-auto flex justify-between">
             <h1 class="text-3xl mt-4 ml-3"><strong>Where in the world?</strong></h1>
-            <div class="mt-5">
+            <div class="js-mode-change mt-5">
                 <i class="fa-solid fa-moon"></i>
                 <button class="mr-4"><strong>Dark Mode</strong></button>
             </div>
         </div>
     </header>
-    <main class="w-full flex flex-col h-186 bg-gray-200">
+    <main class="js-main w-full flex h-225 bg-gray-200 light">
         <div class="container w-11/12 mx-auto justify-between">
             <section class="hero">
-                <div class="w-full h-20 flex justify-between items-center">
+                <div class="w-full h-20 flex justify-between items-center ">
                     <input class="w-100 h-10 p-5 outline-transparent border-transparent inset-shadow-sm inset-shadow-gray-500 rounded-lg bg-white" type="text" placeholder="Search for a country…">
                     <select name="" id="" class="bg-white w-30 h-8 rounded-lg">
                         <option value="" disabled selected hidden>Filter By Region</option>
                     </select>
                 </div>
-                <ul class="w-full h-190 flex flex-wrap justify-between gap-1"></ul>
+                <ul class="js-countries-list w-full h-210 flex flex-wrap justify-between gap-1 light"></ul>
             </section>
         </div>
     </main>
+    <footer class="js-footer w-full h-20 flex justify-center items-center light">
+        <div class="js-pegination-box flex gap-10">
+            <button class="js-prev-btn w-10 h-10 shadow-lg border-3 border-gray-300"><i class="fa-solid fa-arrow-left js-prev-btn"></i></button>
+            <p class="js-list-page text-2xl"></p>
+            <button class="js-next-btn w-10 h-10 shadow-lg border-3 border-gray-300"><i class="fa-solid fa-arrow-right js-next-btn"></i></button>
+        </div>
+    </footer>
 
-    <script src="./main.js"></script>
+    <script src="./JS/main.js"></script>
+    <script src="./JS/mode.js"></script>
 </body>
 </html>
