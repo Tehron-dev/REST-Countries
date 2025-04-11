@@ -10,17 +10,20 @@ async function fetchUrl(url) {
     try {
         let request = await fetch(url);
         let response = await request.json();
-        countries = response
+        countries = response;
+        countries = response.map((country, ind) => {
+            country.id = ind + 1;
+            return country;
+        });
         renderPage();
     }catch (error) {
         console.log(error);
     };
 };
 
-async function renderFunction(arr) {
+function renderFunction(arr) {
     const docFrag = document.createDocumentFragment();
-    arr.forEach((country, index) => {
-        country["id"] = index + 1;
+    arr.forEach((country) => {
         let clone = elTemp.cloneNode(true);
         const countryFlagImg = clone.querySelector(".js-country-flag-img");
         countryFlagImg.src = country.flags.png;
