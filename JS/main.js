@@ -22,9 +22,12 @@ async function renderFunction(arr) {
     arr.forEach((country, index) => {
         country["id"] = index + 1;
         let clone = elTemp.cloneNode(true);
-        clone.querySelector(".js-country-list").dataset.id = country.id;
-        clone.querySelector(".js-country-flag-img").src = country.flags.png;
-        clone.querySelector(".js-country-name").textContent = country.name.common;
+        const countryFlagImg = clone.querySelector(".js-country-flag-img");
+        countryFlagImg.src = country.flags.png;
+        countryFlagImg.dataset.id = country.id;
+        const countryName = clone.querySelector(".js-country-name");
+        countryName.textContent = country.name.common;
+        countryName.dataset.id = country.id;
         clone.querySelector(".js-country-population").textContent = country.population;
         clone.querySelector(".js-country-region").textContent = country.region;
         clone.querySelector(".js-country-capital").textContent = country.capital;
