@@ -10,7 +10,7 @@ async function fetchUrl(url) {
     try {
         let request = await fetch(url);
         let response = await request.json();
-        countries = response;
+        countries = response
         renderPage();
     }catch (error) {
         console.log(error);
@@ -19,8 +19,10 @@ async function fetchUrl(url) {
 
 async function renderFunction(arr) {
     const docFrag = document.createDocumentFragment();
-    arr.forEach(country => {
+    arr.forEach((country, index) => {
+        country["id"] = index + 1;
         let clone = elTemp.cloneNode(true);
+        clone.querySelector(".js-country-list").dataset.id = country.id;
         clone.querySelector(".js-country-flag-img").src = country.flags.png;
         clone.querySelector(".js-country-name").textContent = country.name.common;
         clone.querySelector(".js-country-population").textContent = country.population;
