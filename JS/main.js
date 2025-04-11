@@ -15,7 +15,10 @@ async function fetchUrl(url) {
     try {
         let request = await fetch(url);
         let response = await request.json();
-        countries = response;
+        countries = response.map((country, id) => {
+            country.id = id;
+            return country;
+        });
         renderPage();
     }catch (error) {
         console.log(error);
@@ -25,8 +28,7 @@ async function fetchUrl(url) {
 async function renderFunction(arr, regex="") {
     const docFrag = document.createDocumentFragment();
     elCountriesList.innerHTML = ''
-    arr.forEach((country, index) => {
-        country["id"] = index + 1;
+    arr.forEach((country) => {
         let clone = elTemp.cloneNode(true);
         const countryFlagImg = clone.querySelector(".js-country-flag-img");
         countryFlagImg.src = country.flags.png;
@@ -63,20 +65,19 @@ elPeginationBox.addEventListener("click", evt => {
         if (currentPage > 1) {
             currentPage--;
             renderPage();
-        }   
-    }
+        };
+    };
     if(evt.target.matches(".js-next-btn")) {
         if (currentPage * itemsPerPage < countries.length) {
             currentPage++;
             renderPage();
-        }
-    }
+        };
+    };
 });  
 
 function filterCountries(regex, searchValue){
     let searchResult = currentItems.filter(country => {
         let res = (searchValue == "" || country.name.common.match(regex)) && (elSelectSortRegion.value == '' || country.region.toLowerCase().includes(elSelectSortRegion.value));
-        console.log(res)
         return res;
     });
     renderFunction(searchResult, regex);
@@ -96,19 +97,6 @@ const sortCountries = {
         else return -1;
     }
 };
-  
-// elSearchCountry.addEventListener("input", (evt) => {
-//     const searchValue = evt.target.value.trim()
-//     let regex = new RegExp(searchValue, "gi");
-//     filterCountries(regex, searchValue);
-// });
-
-// elSortSelect.addEventListener("change", (evt) => {
-//     if(evt.target.value){
-//         currentItems.sort(sortCountries[elSortSelect.value]);
-//         renderFunction(currentItems)
-//     };
-// });
 
 elForm.addEventListener("submit", evt => {
     evt.preventDefault();
@@ -122,3 +110,10 @@ elForm.addEventListener("submit", evt => {
 })
 
 fetchUrl("https://restcountries.com/v3.1/all");
+
+elCountriesList.addEventListener("click", evt => {
+    const id = evt.target.dataset.id;
+    let countryName = countries[id].name.common;
+    window.localStorage.setItem("countryName", countryName);
+    window.location = "/html/main.html";
+});
