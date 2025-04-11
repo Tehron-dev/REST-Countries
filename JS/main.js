@@ -1,6 +1,7 @@
 const elTemp = document.querySelector(".js-temp").content;
 const elCountriesList = document.querySelector(".js-countries-list");
 const elPeginationBox = document.querySelector(".js-pegination-box");
+const elSearchCountry = document.querySelector(".js-serarch-countries");
 let elListPage = document.querySelector(".js-list-page");
 let currentPage = 1;
 let itemsPerPage = 8;
@@ -57,3 +58,5 @@ elPeginationBox.addEventListener("click", evt => {
         }
     }
 });
+
+elSearchCountry.addEventListener("")
