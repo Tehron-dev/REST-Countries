@@ -1,10 +1,12 @@
+const elForm = document.querySelector(".js-form");
 const elTemp = document.querySelector(".js-temp").content;
 const elCountriesList = document.querySelector(".js-countries-list");
 const elPeginationBox = document.querySelector(".js-pegination-box");
 const elSearchCountry = document.querySelector(".js-search-countries");
 const elSortSelect = document.querySelector(".js-sort-select");
-let elListPage = document.querySelector(".js-list-page");
-let currentPage = 1;
+const elListPage = document.querySelector(".js-list-page");
+const elSelectSortRegion = document.querySelector(".js-sort-region");
+let currentPage = window.localStorage.getItem("page") ? JSON.parse(window.localStorage.getItem("page")) : 1;
 let itemsPerPage = 8;
 let countries = [];
 let currentItems = [];
@@ -13,7 +15,7 @@ async function fetchUrl(url) {
     try {
         let request = await fetch(url);
         let response = await request.json();
-        countries = response
+        countries = response;
         renderPage();
     }catch (error) {
         console.log(error);
@@ -32,7 +34,7 @@ async function renderFunction(arr, regex="") {
         const countryName = clone.querySelector(".js-country-name");
         if(regex && (regex == "(?:)")) {
             countryName.innerHTML = country.name.common.replaceAll(regex, match => {
-                return `<mark class="rounded-lg">${match}</mark>`
+                return `<mark>${match}</mark>`
             })
         }else {
             countryName.textContent = country.name.common;
@@ -53,6 +55,7 @@ function renderPage(){
     elCountriesList.innerHTML = '';
     renderFunction(currentItems);
     elListPage.textContent = currentPage;
+    window.localStorage.setItem("page", JSON.stringify(currentPage));
 };
 
 elPeginationBox.addEventListener("click", evt => {
@@ -72,55 +75,50 @@ elPeginationBox.addEventListener("click", evt => {
 
 function filterCountries(regex, searchValue){
     let searchResult = currentItems.filter(country => {
-        let res = searchValue == "" || country.name.common.match(regex);
+        let res = (searchValue == "" || country.name.common.match(regex)) && (elSelectSortRegion.value == '' || country.region.toLowerCase().includes(elSelectSortRegion.value));
+        console.log(res)
         return res;
     });
     renderFunction(searchResult, regex);
 };  
-  
-elSearchCountry.addEventListener("input", (evt) => {
-    const searchValue = evt.target.value.trim()
-    let regex = new RegExp(searchValue, "gi");
-    filterCountries(regex, searchValue);
-});
 
-<<<<<<< HEAD
-fetchUrl("https://restcountries.com/v3.1/all");
-elCountriesList.addEventListener("click", country);
-=======
-function sortCountries(type) {
-    if (type == "a-z") {
-        countries.sort((a, b) => {
-            if (a.name.common.toLowerCase() > b.name.common.toLowerCase()) {
-                return 1;
-            } else if (a.name.common.toLowerCase() < b.name.common.toLowerCase()) {
-                return -1;
-            } else {
-                return 0;
-            }
-        });
-    } else if (type == "z-a") {
-        countries.sort((a, b) => {
-            if (a.name.common.toLowerCase() > b.name.common.toLowerCase()) {
-                return -1;
-            } else if (a.name.common.toLowerCase() < b.name.common.toLowerCase()) {
-                return 1;
-            } else {
-                return 0;
-            }
-        });
-    } else if (type == "population") {
-        countries.sort((a, b) => b.population - a.population);
+const sortCountries = {
+    ["a-z"]: function(a, b){
+         return a.name.common.localeCompare(b.name.common);
+    },
+    ["z-a"]: function(a, b){
+        return b.name.common.localeCompare(a.name.common);
+    },
+    ["population"]: function(a, b){
+        const A = a.population;
+        const B = b.population;
+        if(A < B) return 1
+        else return -1;
     }
+};
+  
+// elSearchCountry.addEventListener("input", (evt) => {
+//     const searchValue = evt.target.value.trim()
+//     let regex = new RegExp(searchValue, "gi");
+//     filterCountries(regex, searchValue);
+// });
 
-    currentPage = 1;
-    renderPage();
-}
+// elSortSelect.addEventListener("change", (evt) => {
+//     if(evt.target.value){
+//         currentItems.sort(sortCountries[elSortSelect.value]);
+//         renderFunction(currentItems)
+//     };
+// });
 
-elSortSelect.addEventListener("change", (evt) => {
-    sortCountries(evt.target.value);
-});
-
+elForm.addEventListener("submit", evt => {
+    evt.preventDefault();
+    const searchValue = elSearchCountry.value;
+    let regex = new RegExp(searchValue, "gi");
+    if(elSortSelect.value){
+        currentItems.sort(sortCountries[elSortSelect.value]);
+        renderFunction(currentItems);
+    };
+    filterCountries(regex, searchValue);
+})
 
 fetchUrl("https://restcountries.com/v3.1/all");
->>>>>>> c7ff382902d01bcdbcdaad01c151f9925b9d1959
