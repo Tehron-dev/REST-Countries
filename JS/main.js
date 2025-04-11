@@ -2,6 +2,7 @@ const elTemp = document.querySelector(".js-temp").content;
 const elCountriesList = document.querySelector(".js-countries-list");
 const elPeginationBox = document.querySelector(".js-pegination-box");
 const elSearchCountry = document.querySelector(".js-search-countries");
+const elSortSelect = document.querySelector(".js-sort-select");
 let elListPage = document.querySelector(".js-list-page");
 let currentPage = 1;
 let itemsPerPage = 8;
@@ -83,5 +84,43 @@ elSearchCountry.addEventListener("input", (evt) => {
     filterCountries(regex, searchValue);
 });
 
+<<<<<<< HEAD
 fetchUrl("https://restcountries.com/v3.1/all");
 elCountriesList.addEventListener("click", country);
+=======
+function sortCountries(type) {
+    if (type == "a-z") {
+        countries.sort((a, b) => {
+            if (a.name.common.toLowerCase() > b.name.common.toLowerCase()) {
+                return 1;
+            } else if (a.name.common.toLowerCase() < b.name.common.toLowerCase()) {
+                return -1;
+            } else {
+                return 0;
+            }
+        });
+    } else if (type == "z-a") {
+        countries.sort((a, b) => {
+            if (a.name.common.toLowerCase() > b.name.common.toLowerCase()) {
+                return -1;
+            } else if (a.name.common.toLowerCase() < b.name.common.toLowerCase()) {
+                return 1;
+            } else {
+                return 0;
+            }
+        });
+    } else if (type == "population") {
+        countries.sort((a, b) => b.population - a.population);
+    }
+
+    currentPage = 1;
+    renderPage();
+}
+
+elSortSelect.addEventListener("change", (evt) => {
+    sortCountries(evt.target.value);
+});
+
+
+fetchUrl("https://restcountries.com/v3.1/all");
+>>>>>>> c7ff382902d01bcdbcdaad01c151f9925b9d1959
