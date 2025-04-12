@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-md w-96">
+        <h1 class="text-2xl font-semibold text-center text-gray-700 mb-6">Create Account</h1>
+        <form id="registrationForm" class="js-login-form" autocomplete="off">
+            <input type="text" id="name" placeholder="Full Name" required class="js-login-name w-full p-2 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <input type="email" id="email" placeholder="Email" required class="js-login-email w-full p-2 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <input type="text" id="username" placeholder="Username" required class="js-login-username w-full p-2 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <input type="password" id="password" placeholder="Password" required class="js-login-password w-full p-2 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <p class="js-login-err-msg text-red-500 text-center hidden">Email xato !</p>
+            <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition duration-200">LOG IN</button>
+        </form>
+    </div>
+
+    <script src="/JS/login.js"></script>
+</body>
+</html>

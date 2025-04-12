@@ -1,24 +1,24 @@
-const elForm = document.querySelector(".js-register-form");
+const elRegisterForm = document.querySelector(".js-register-form");
 const elPassword = document.querySelector(".js-password");
 const elErrorMsg = document.querySelector(".js-error-msg");
-const elUsername = document.querySelector(".js-username");
+const elEmail = document.querySelector(".js-email");
 
-elForm.addEventListener("submit", (evt) => {
+elRegisterForm?.addEventListener("submit", (evt) => {
       evt.preventDefault();
   
-      const username = elUsername.value.trim();
+      const email = elEmail.value.trim();
       const password = elPassword.value.trim();
       const users = JSON.parse(localStorage.getItem("users")) || [];
       
-      const isExist = users.find((user) => user.username == username);
-      if (isExist) {
-        elErrorMsg.classList.remove("hidden");
+      const isExist = users.find((user) => user.emailValue == email);
+      const isPassword = isExist != undefined ? isExist.passwordValue == password : "Email not found !";
+      if (isExist && isPassword) {
+        window.location.href = `./html/countries.html`;
+        elPassword.value = '';
+        elEmail.value = '';
       } else {
-        users.push({ username, password });
-        localStorage.setItem("users", JSON.stringify(users));
-        localStorage.setItem("isLoggedIn", "true");
-        localStorage.setItem("currentUser", username);
-        window.location.href = `/index.html`;
-      }
+        elErrorMsg.classList.remove("hidden");
+        elPassword.value = '';
+        elEmail.value = '';
+      };
 });
-      
