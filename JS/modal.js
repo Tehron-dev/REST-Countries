@@ -24,7 +24,7 @@ function handleRenderCountry(arr){
     arr.forEach(country => {
         elFlagCountry.src = country.flags.png ? country.flags.png : "Flag picture wasn't found";
         elCountryName.textContent = country.name.common ? country.name.common : "Name was not found";
-        elCountryNativeName.textContent = country.name.nativeName ? Object.values(country.name.nativeName) : "Native namewas not found";
+        elCountryNativeName.textContent = country.name.official;
         elPopulation.textContent = country.population ? country.population : "Country population was not found";
         elCountryRegion.textContent = country.region ? country.region : "Region was not found";
         elCountrySubRegion.textContent = country.subregion ? country.subregion : "Subregion was not found";
