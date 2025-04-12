@@ -117,3 +117,15 @@ elCountriesList.addEventListener("click", evt => {
     window.localStorage.setItem("countryName", countryName);
     window.location = "/html/main.html";
 });
+
+const logoutBtn = document.querySelector(".js-logout-btn");
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", () => {
+            localStorage.removeItem("isLoggedIn");
+            localStorage.removeItem("currentUser");
+            window.location.href = `/html/register.html`;
+        });
+    }
+    if (!localStorage.getItem("isLoggedIn")) {
+        window.location.href = `/html/register.html`;
+}

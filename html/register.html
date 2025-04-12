@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Register</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" />
+</head>
+<body class="flex justify-center items-center h-screen bg-gray-100">
+    <form class="js-register-form bg-white p-8 rounded-lg shadow-lg w-96 space-y-4">
+        <h2 class="text-2xl font-bold text-center">Register</h2>
+        <input type="text" placeholder="Username" class="js-username w-full p-2 border rounded" required />
+        <input type="password" placeholder="Password" class="js-password w-full p-2 border rounded" required />
+        <button type="submit" class="bg-green-500 text-white w-full p-2 rounded">Register</button>
+        <p class="js-error-msg text-red-500 text-center hidden">Bu username allaqachon mavjud</p>
+    </form>
+
+    <script src="/JS/register.js"></script>
+</body>
+</html>
