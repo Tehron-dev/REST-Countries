@@ -6,6 +6,8 @@ const elSearchCountry = document.querySelector(".js-search-countries");
 const elSortSelect = document.querySelector(".js-sort-select");
 const elListPage = document.querySelector(".js-list-page");
 const elSelectSortRegion = document.querySelector(".js-sort-region");
+const elModeChange = document.querySelector(".js-mode-change");
+const elCountryList = elTemp.querySelector(".js-country-list")
 let currentPage = window.localStorage.getItem("page") ? JSON.parse(window.localStorage.getItem("page")) : 1;
 let itemsPerPage = 8;
 let countries = [];
@@ -36,11 +38,11 @@ async function renderFunction(arr, regex="") {
         const countryName = clone.querySelector(".js-country-name");
         if(regex && !(regex == "(?:)")) {
             countryName.innerHTML = country.name.common.replaceAll(regex, match => {
-                return `<mark>${match}</mark>`
+                return `<mark>${match}</mark>`;
             })
         }else {
             countryName.textContent = country.name.common;
-        }
+        };
         countryName.dataset.id = country.id;
         clone.querySelector(".js-country-population").textContent = country.population;
         clone.querySelector(".js-country-region").textContent = country.region;
@@ -116,4 +118,57 @@ elCountriesList.addEventListener("click", evt => {
     let countryName = countries[id].name.common;
     window.localStorage.setItem("countryName", countryName);
     window.location = "/html/main.html";
+});
+
+
+
+let mode = localStorage.getItem("mode") === "dark";
+function applyMode() {
+    if (mode) {
+        elCountriesList.classList.add("dark");
+        elCountriesList.classList.remove("light");
+        document.querySelector(".js-header").classList.add("dark");
+        document.querySelector(".js-header").classList.remove("light");
+        document.querySelectorAll(".js-country-list").forEach(el => {
+            el.classList.add("dark");
+            el.classList.remove("light");
+        });
+        document.querySelector(".js-main").classList.add("dark");
+        document.querySelector(".js-main").classList.remove("light");
+        document.querySelector(".js-footer").classList.add("dark");
+        document.querySelector(".js-footer").classList.remove("light");
+        elForm.querySelector(".js-search-countries").classList.add("dark");
+        elForm.querySelector(".js-search-countries").classList.remove("light");
+        elForm.querySelector(".js-sort-region").classList.add("dark");
+        elForm.querySelector(".js-sort-region").classList.remove("light");
+        elForm.querySelector(".js-sort-select").classList.add("dark");
+        elForm.querySelector(".js-sort-select").classList.remove("light");
+        document.querySelector(".js-mode").textContent = "Light Mode";
+    } else {
+        elCountriesList.classList.remove("dark");
+        elCountriesList.classList.add("light");
+        document.querySelector(".js-header").classList.add("light");
+        document.querySelector(".js-header").classList.remove("dark");
+        document.querySelectorAll(".js-country-list").forEach(el => {
+            el.classList.add("light");
+            el.classList.remove("dark");
+        });
+        document.querySelector(".js-main").classList.add("light");
+        document.querySelector(".js-main").classList.remove("dark");
+        document.querySelector(".js-footer").classList.add("light");
+        document.querySelector(".js-footer").classList.remove("dark");
+        elForm.querySelector(".js-search-countries").classList.add("light");
+        elForm.querySelector(".js-search-countries").classList.remove("dark");
+        elForm.querySelector(".js-sort-region").classList.add("light");
+        elForm.querySelector(".js-sort-region").classList.remove("dark");
+        elForm.querySelector(".js-sort-select").classList.add("light");
+        elForm.querySelector(".js-sort-select").classList.remove("dark");
+        document.querySelector(".js-mode").textContent = "Dark Mode";
+    };
+};
+applyMode();
+elModeChange.addEventListener("click", () => {
+    mode = !mode;
+    localStorage.setItem("mode", mode ? "dark" : "light");
+    applyMode();
 });

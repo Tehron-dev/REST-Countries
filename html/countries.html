@@ -10,7 +10,7 @@
     .dark {
         background: #2b3844;
         color: #fff;
-        box-shadow: 0px 2px 4px 0px #0000000e;
+        box-shadow: 0px 2px 4px 0px #000000;
     }
 
     .light {
@@ -22,8 +22,8 @@
 </head>
 <body>
 
-    <template class="js-temp light">
-        <li class="js-country-list w-75 h-90 rounded-xl shadow-xl mt-5">
+    <template class="js-temp">
+        <li class="js-country-list w-75 h-90 rounded-xl shadow-xl mt-5 light">
             <img class="js-country-flag-img rounded-t-xl w-full h-50" src="https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Flag_of_Germany.svg/640px-Flag_of_Germany.svg.png" alt="country flag">
             <div class="js-data-country w-fit p-5">
                 <h2 class="text-2xl"><strong class="js-country-name">Germany</strong></h2>
@@ -34,12 +34,12 @@
         </li>
     </template>
 
-    <header class="js-header w-full h-20 border-3 border-gray-200 light">
+    <header class="js-header w-full h-20 light">
         <div class="container w-11/12 mx-auto flex justify-between">
             <h1 class="text-3xl mt-4 ml-3"><strong>Where in the world?</strong></h1>
             <div class="js-mode-change mt-5">
                 <i class="fa-solid fa-moon"></i>
-                <button class="mr-4"><strong>Dark Mode</strong></button>
+                <button class="mr-4"><strong class="js-mode">Dark Mode</strong></button>
             </div>
         </div>
     </header>
@@ -65,7 +65,7 @@
                         </select>
                     </form>
                 </div>
-                <ul class="js-countries-list w-full h-210 flex flex-wrap justify-between gap-1 light"></ul>
+                <ul class="js-countries-list w-full h-204 flex flex-wrap justify-between gap-1 p-3 light"></ul>
             </section>
         </div>
     </main>
