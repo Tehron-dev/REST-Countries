@@ -9,13 +9,11 @@ const users = window.localStorage.getItem("users") ? JSON.parse(window.localStor
 
 const validUser = (evt) => {
     evt.preventDefault();
-    const emailValue = elLoginEmail.value;
+    const emailValue = elLoginEmail.value.trim();
     const nameValue = elLoginName.value.trim();
     const usernameValue = elLoginUsername.value.trim();
     const passwordValue = elLoginPassword.value.trim();
-    const checkEmail = users.find((user) => user.emailValue == emailValue);
-    const checkUsername = users.find(({usernameValue}) => usernameValue == usernameValue);
-    if(emailValue && emailRegex.test(emailValue) && !checkEmail && !checkUsername){
+    if(emailValue && emailRegex.test(emailValue)){
         users.push({nameValue, emailValue, usernameValue, passwordValue});
         window.localStorage.setItem("users", JSON.stringify(users));
         window.location.href = `./countries.html`;

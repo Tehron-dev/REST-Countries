@@ -12,6 +12,7 @@ let currentPage = window.localStorage.getItem("page") ? JSON.parse(window.localS
 let itemsPerPage = 8;
 let countries = [];
 let currentItems = [];
+let mode = localStorage.getItem("mode") ? window.localStorage.getItem("mode") : "light";
 
 async function fetchUrl(url) {
     try {
@@ -32,6 +33,14 @@ async function renderFunction(arr, regex="") {
     elCountriesList.innerHTML = ''
     arr.forEach((country) => {
         let clone = elTemp.cloneNode(true);
+        const countryItem = clone.querySelector(".js-country-list");
+        if (mode == "light") {
+            countryItem.classList.add("dark");
+            countryItem.classList.remove("light");
+        } else {
+            countryItem.classList.add("light");
+            countryItem.classList.remove("dark");
+        }
         const countryFlagImg = clone.querySelector(".js-country-flag-img");
         countryFlagImg.src = country.flags.png;
         countryFlagImg.dataset.id = country.id;
@@ -39,10 +48,10 @@ async function renderFunction(arr, regex="") {
         if(regex && !(regex == "(?:)")) {
             countryName.innerHTML = country.name.common.replaceAll(regex, match => {
                 return `<mark>${match}</mark>`;
-            })
+            });
         }else {
             countryName.textContent = country.name.common;
-        };
+        }
         countryName.dataset.id = country.id;
         clone.querySelector(".js-country-population").textContent = country.population;
         clone.querySelector(".js-country-region").textContent = country.region;
@@ -122,9 +131,8 @@ elCountriesList.addEventListener("click", evt => {
 
 
 
-let mode = localStorage.getItem("mode") === "dark";
 function applyMode() {
-    if (mode) {
+    if (mode == "light") {
         elCountriesList.classList.add("dark");
         elCountriesList.classList.remove("light");
         document.querySelector(".js-header").classList.add("dark");
@@ -168,7 +176,7 @@ function applyMode() {
 };
 applyMode();
 elModeChange.addEventListener("click", () => {
-    mode = !mode;
-    localStorage.setItem("mode", mode ? "dark" : "light");
+    mode = mode == "dark" ? "light" : "dark";
+    localStorage.setItem("mode", mode);
     applyMode();
 });
