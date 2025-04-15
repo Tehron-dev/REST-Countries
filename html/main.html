@@ -6,18 +6,28 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        .dark {
+            background: #2b3844;
+            color: #fff;
+            box-shadow: 0px 2px 4px 0px #000000;
+        }
+    
+        .light {
+            background: #fff;
+            color: #000;
+            box-shadow: 0px 2px 4px 0px #0000000e;
+        }
+        </style>
 </head>
 <body>
     
-    <header class="w-full h-20 border-gray-200 border-3">
+    <header class="js-header w-full h-20">
         <div class="container w-11/12 h-full mx-auto flex">
             <div class="head-site-name-box w-1/2 h-full flex items-center"><h1 class="text-3xl "><strong>Where in the world ?</strong></h1></div>
-            <div class="site-mode-box w-1/2 h-full flex items-center justify-end">
-                <button type="button" class="cursor-pointer"><i class="fa-regular fa-moon"></i> <strong>Dark Mode</strong></button>
-            </div>
         </div>
     </header>
-    <main class="w-full h-187">
+    <main class="js-main w-full h-187">
         <div class="container w-11/12 h-full mx-auto">
             <section>
                 <div class="back-btn-box w-full h-30 p-5">

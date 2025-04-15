@@ -9,8 +9,9 @@ const elCountryBorders = document.querySelector(".js-data-country-borders");
 const elCountryDomain = document.querySelector(".js-country-domain");
 const elCountryCurrencie = document.querySelector(".js-country-cuurencie");
 const elCountryLanguages = document.querySelector(".js-country-languages");
+// let mode = window.localStorage.getItem("mode") ? window.localStorage.getItem("mode") : "light";
 
-let data = []
+let data = [];
 
 async function handleCountry(){
     let country = window.localStorage.getItem("countryName");
@@ -18,11 +19,11 @@ async function handleCountry(){
     data = await req.json();
     handleRenderCountry(data);
 };
-handleCountry()
+handleCountry();
 
 function handleRenderCountry(arr){
     arr.forEach(country => {
-        elFlagCountry.src = country.flags.png ? country.flags.png : "Flag picture wasn't found";
+        elFlagCountry.src = country.flags.svg ? country.flags.svg : "Flag picture wasn't found";
         elCountryName.textContent = country.name.common ? country.name.common : "Name was not found";
         elCountryNativeName.textContent = country.name.official;
         elPopulation.textContent = country.population ? country.population : "Country population was not found";
@@ -33,5 +34,16 @@ function handleRenderCountry(arr){
         elCountryDomain.textContent = country.domain ? country.domain : "Domain was not found";
         elCountryCurrencie.textContent = country.currencies ? Object.values(country.currencies)[0].name : "Currencie was not found";
         elCountryLanguages.textContent = country.languages ? Object.values(country.languages) : "Languages were not found";
-    })
-}
+    });
+};
+
+const changeMode = () => {
+    let mode = window.localStorage.getItem("mode") ? window.localStorage.getItem("mode") : "light";
+    if(mode == "light"){
+        document.querySelector(".js-header").classList.add("dark");
+        document.querySelector(".js-header").classList.remove("light");
+        document.querySelector(".js-main").classList.add("dark");
+        document.querySelector(".js-main").classList.remove("light");
+    };
+};
+changeMode();
